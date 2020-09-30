@@ -1,0 +1,17 @@
+{
+	"name": "rmq-tester",
+	"dockerComposeFile": [
+		"docker-compose.yml",
+		"docker-compose.override.yml"
+	],
+	"service": "application",
+	"workspaceFolder": "/usr/workspace",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+	"extensions": [
+		"mikestead.dotenv",
+	],
+	"shutdownAction": "stopCompose",
+	"postCreateCommand": "docker --version"
+}

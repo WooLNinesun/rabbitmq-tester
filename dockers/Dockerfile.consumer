@@ -1,0 +1,17 @@
+FROM node:12.16.1-stretch
+
+# Create app directory
+WORKDIR /usr/workspace
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm clean-install
+
+# Copy all app file
+COPY ./apps/consumer ./apps/consumer
+COPY ./libs ./libs
+COPY tsconfig.json tsconfig.build.json nest-cli.json ./
+
+RUN npm run build consumer
+
+CMD [ "npm", "run", "start:consumer:prod" ]

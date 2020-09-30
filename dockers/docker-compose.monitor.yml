@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  prometheus:
+    image: 'prom/prometheus:v2.21.0'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    restart: 'no'
+
+  grafana:
+    image: 'grafana/grafana'
+    volumes:
+      - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/rabbitmq.yaml
+      - ./grafana/dashboards:/dashboards
+    ports:
+      - 3000:3000
+    restart: 'no'

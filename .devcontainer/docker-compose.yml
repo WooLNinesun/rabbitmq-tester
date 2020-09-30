@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERNAME: ${USER}
+        USER_UID: 1000 # id -u
+        USER_GID: 1000 # id -g
+        TimeZone: Asia/Taipei
+    image: 'rmq-tester/development:latest'
+    container_name: rmq-tester-development
+    expose:
+      - 3000 # for producer
+    volumes:
+      - ..:/usr/workspace
+    command: sleep infinity

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  rabbitmq:
+    build:
+      context: ..
+      dockerfile: ./dockers/Dockerfile.rabbitmq
+    image: 'rmq-tester-rabbitmq:3.8.8-management'
+    ports:
+      - 15672:15672
+    environment:
+      RABBITMQ_LOGS: '' # unset RABBITMQ_LOGS
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    volumes:
+      - ${RABBITMQ_CONFD_BASE}:/etc/rabbitmq/conf.d
+      - ${RABBITMQ_DATA_BASE}:/var/lib/rabbitmq
+      - ${RABBITMQ_LOG_BASE}:/var/log/rabbitmq
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    restart: 'no'
